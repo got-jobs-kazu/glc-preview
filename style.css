@@ -1,0 +1,119 @@
+/* =========================================
+   基本設定（色のルール決めなど）
+========================================= */
+:root {
+    --main-green: #00702c; /* ご指定のパキッとした深緑 */
+    --sub-green: #8cbf44;  /* ドロップダウン用の黄緑 */
+    --text-white: #ffffff;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans JP", sans-serif;
+    /* スクロール機能を確認するため、あえて縦に長くしています */
+    height: 2000px; 
+    background-color: #f5f5f5;
+}
+
+/* =========================================
+   PC用：グローバルナビゲーション
+========================================= */
+.pc-nav {
+    position: sticky; /* 画面上部に追従させる魔法 */
+    top: 0;
+    background-color: var(--main-green);
+    z-index: 1000;
+}
+
+.nav-list {
+    display: flex; /* 横並びに均等に広げる（前回苦戦した部分ですね！） */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+}
+
+.nav-list > li {
+    flex: 1;
+    text-align: center;
+    border-right: 1px solid var(--text-white);
+    position: relative; /* ドロップダウンの基準点にする */
+}
+
+.nav-list > li:last-child {
+    border-right: none;
+}
+
+.nav-list a {
+    display: block;
+    padding: 15px 0;
+    color: var(--text-white);
+    text-decoration: none;
+    font-weight: bold;
+    transition: opacity 0.3s;
+}
+
+.nav-list a:hover {
+    opacity: 0.6; /* ホバーで薄くする */
+}
+
+/* ドロップダウンメニューの基本非表示設定（アニメーションの準備） */
+.dropdown-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--sub-green);
+    padding: 0;
+    list-style: none;
+}
+
+/* =========================================
+   メインビジュアル
+========================================= */
+.main-visual {
+    height: 600px;
+    /* ↓用意した背景画像のファイル名をここに入れます（仮でグレーにしています） */
+    background-color: #cccccc; 
+    background-size: cover;
+    background-position: center;
+}
+
+/* =========================================
+   スマホ用表示の初期設定（PC画面では隠しておく）
+========================================= */
+.mobile-header {
+    display: none;
+}
+
+/* =========================================
+   画面右側の追従ボタンなどの配置準備
+========================================= */
+.side-buttons {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 999;
+}
+
+.scroll-top {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    background-color: var(--main-green);
+    color: var(--text-white);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 999;
+}
