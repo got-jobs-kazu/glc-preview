@@ -9,24 +9,40 @@
 <body>
 
     <header class="mobile-header">
-        <div class="mobile-logo">多摩市立グリーンライブセンター</div>
-        <div class="hamburger-menu">
+        <a href="#" class="mobile-logo">多摩市立グリーンライブセンター</a>
+        <div class="hamburger-menu" id="js-open-menu">
             <span></span>
             <span></span>
             <span></span>
         </div>
     </header>
 
+    <div class="mobile-menu-overlay" id="js-mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="close-menu" id="js-close-menu">✕</div>
+        </div>
+        <ul class="mobile-menu-list">
+            <li><a href="#">施設案内</a></li>
+            <li><a href="#">講座・勉強会</a></li>
+            <li><a href="#">カレンダー</a></li>
+            <li><a href="#">ブログ</a></li>
+            <li><a href="#">お知らせ</a></li>
+            <li><a href="#">アクセス</a></li>
+            <li><a href="#">刊行物</a></li>
+        </ul>
+    </div>
+
+    <nav class="mobile-bottom-bar">
+        <a href="#">カレンダー</a>
+        <a href="#">ブログ</a>
+        <a href="#">お知らせ</a>
+    </nav>
+
     <nav class="pc-nav">
         <ul class="nav-list">
             <li><a href="#">多摩市立グリーンライブセンター</a></li>
             <li class="has-dropdown">
                 <a href="#">施設案内</a>
-                <ul class="dropdown-list">
-                    <li><a href="#">施設紹介</a></li>
-                    <li><a href="#">講座・勉強会</a></li>
-                    <li><a href="#">花とみどりの相談</a></li>
-                </ul>
             </li>
             <li><a href="#">講座・勉強会</a></li>
             <li><a href="#">カレンダー</a></li>
@@ -38,16 +54,52 @@
     </nav>
 
     <main class="main-visual">
-        <div class="hero-content">
-            </div>
+        <div class="hero-content"></div>
     </main>
 
-    <aside class="side-buttons">
+    <aside class="side-buttons pc-only">
         <a href="#" class="side-btn">講座・勉強会</a>
         <a href="#" class="side-btn">花とみどりの相談</a>
     </aside>
 
-    <div class="scroll-top">△</div>
+    <div class="scroll-top" id="js-scroll-top">∧</div>
 
+    <div style="height: 1500px; padding: 50px; text-align: center; background-color: #f5f5f5;">
+        <p>↓ スクロールしてボタンの動きや追従を確認してください ↓</p>
+    </div>
+
+    <script>
+        // ① スクロールトップボタン（∧）の表示・非表示とクリック動作
+        const scrollTopBtn = document.getElementById('js-scroll-top');
+        
+        window.addEventListener('scroll', () => {
+            // 300px以上スクロールしたらボタンを表示（クラスを追加）
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('show');
+            } else {
+                scrollTopBtn.classList.remove('show');
+            }
+        });
+
+        // ボタンを押したら一番上へ滑らかに戻る
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ② スマホ用ハンバーガーメニューの開閉アニメーション
+        const openBtn = document.getElementById('js-open-menu');
+        const closeBtn = document.getElementById('js-close-menu');
+        const mobileMenu = document.getElementById('js-mobile-menu');
+
+        // 「≡」を押したらメニューを右からスライドイン
+        openBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+
+        // 「✕」を押したらメニューを右へスライドアウト
+        closeBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+    </script>
 </body>
 </html>
