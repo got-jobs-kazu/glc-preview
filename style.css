@@ -1,95 +1,32 @@
 /* =========================================
-   基本設定（色のルール決めなど）
+   基本設定（色のルール決め）
 ========================================= */
 :root {
-    --main-green: #00702c; /* ご指定のパキッとした深緑 */
-    --sub-green: #8cbf44;  /* ドロップダウン用の黄緑 */
+    --main-green: #00702c; 
+    --sub-green: #8cbf44;  
     --text-white: #ffffff;
+    --text-black: #333333;
 }
 
 body {
     margin: 0;
     padding: 0;
     font-family: "Noto Sans JP", sans-serif;
-    /* スクロール機能を確認するため、あえて縦に長くしています */
-    height: 2000px; 
     background-color: #f5f5f5;
 }
 
 /* =========================================
-   PC用：グローバルナビゲーション
-========================================= */
-.pc-nav {
-    position: sticky; /* 画面上部に追従させる魔法 */
-    top: 0;
-    background-color: var(--main-green);
-    z-index: 1000;
-}
-
-.nav-list {
-    display: flex; /* 横並びに均等に広げる（前回苦戦した部分ですね！） */
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    width: 100%;
-}
-
-.nav-list > li {
-    flex: 1;
-    text-align: center;
-    border-right: 1px solid var(--text-white);
-    position: relative; /* ドロップダウンの基準点にする */
-}
-
-.nav-list > li:last-child {
-    border-right: none;
-}
-
-.nav-list a {
-    display: block;
-    padding: 15px 0;
-    color: var(--text-white);
-    text-decoration: none;
-    font-weight: bold;
-    transition: opacity 0.3s;
-}
-
-.nav-list a:hover {
-    opacity: 0.6; /* ホバーで薄くする */
-}
-
-/* ドロップダウンメニューの基本非表示設定（アニメーションの準備） */
-.dropdown-list {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: var(--sub-green);
-    padding: 0;
-    list-style: none;
-}
-
-/* =========================================
-   メインビジュアル
+   メインビジュアル（画像差し替え）
 ========================================= */
 .main-visual {
     height: 600px;
-    /* ↓用意した背景画像のファイル名をここに入れます（仮でグレーにしています） */
-    background-color: #cccccc; 
+    background-image: url('glc_top.jpg'); /* ここで画像を読み込み！ */
     background-size: cover;
     background-position: center;
 }
 
 /* =========================================
-   スマホ用表示の初期設定（PC画面では隠しておく）
-========================================= */
-.mobile-header {
-    display: none;
-}
-
-/* =========================================
-   画面右側の追従ボタンなどの配置準備
+   画面右側：中段の追従ボタン（PCのみ）
 ========================================= */
 .side-buttons {
     position: fixed;
@@ -98,22 +35,221 @@ body {
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
-    gap: 10px;
     z-index: 999;
 }
 
+.side-btn {
+    background-color: var(--sub-green);
+    color: var(--text-white);
+    border: 2px solid var(--sub-green); /* 黄緑色の四角い囲み */
+    padding: 15px 10px;
+    margin-bottom: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    writing-mode: vertical-rl; /* 縦書きにして本家っぽく */
+    text-align: center;
+    transition: opacity 0.3s;
+}
+
+.side-btn:hover {
+    opacity: 0.8;
+}
+
+/* =========================================
+   画面右下：トップへ戻るボタン（∧）
+========================================= */
 .scroll-top {
     position: fixed;
     right: 20px;
-    bottom: 20px;
+    bottom: 80px; /* スマホの黒バーに被らないよう少し上に配置 */
     background-color: var(--main-green);
     color: var(--text-white);
     width: 50px;
     height: 50px;
-    border-radius: 50%;
+    border-radius: 5px; /* 丸ではなく四角っぽく */
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 24px;
     cursor: pointer;
     z-index: 999;
+    
+    /* 初期状態は透明で見えないようにする */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+/* JSで .show クラスが付いたらフワッと現れる */
+.scroll-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* =========================================
+   💻 PC向けレイアウト (画面幅769px以上)
+========================================= */
+@media (min-width: 769px) {
+    /* スマホ専用パーツを隠す */
+    .mobile-header, .mobile-menu-overlay, .mobile-bottom-bar {
+        display: none !important;
+    }
+
+    .pc-nav {
+        position: sticky;
+        top: 0;
+        background-color: var(--main-green);
+        z-index: 1000;
+    }
+
+    .nav-list {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        width: 100%;
+    }
+
+    .nav-list > li {
+        flex: 1;
+        text-align: center;
+        border-right: 1px solid var(--text-white);
+    }
+
+    .nav-list > li:last-child {
+        border-right: none;
+    }
+
+    .nav-list a {
+        display: block;
+        padding: 15px 0;
+        color: var(--text-white);
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 14px;
+    }
+}
+
+/* =========================================
+   📱 スマホ向けレイアウト (画面幅768px以下)
+========================================= */
+@media (max-width: 768px) {
+    /* PC専用パーツを隠す */
+    .pc-nav, .pc-only {
+        display: none !important;
+    }
+
+    /* スマホ上部ヘッダー */
+    .mobile-header {
+        position: sticky;
+        top: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--text-white);
+        padding: 10px 20px;
+        z-index: 1000;
+        border-bottom: 2px solid var(--main-green);
+    }
+
+    .mobile-logo {
+        color: var(--text-black);
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    .hamburger-menu {
+        background-color: var(--main-green);
+        width: 40px;
+        height: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    .hamburger-menu span {
+        width: 20px;
+        height: 2px;
+        background-color: var(--text-white);
+    }
+
+    /* スライドしてくる全画面メニュー */
+    .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--main-green);
+        z-index: 2000;
+        /* 最初は画面の右外（100%）に押し出しておく */
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    /* JSで .active が付いたら画面内（0%）にスライドしてくる */
+    .mobile-menu-overlay.active {
+        transform: translateX(0);
+    }
+
+    .mobile-menu-header {
+        display: flex;
+        justify-content: flex-end;
+        padding: 15px 20px;
+    }
+
+    .close-menu {
+        color: var(--text-white);
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    .mobile-menu-list {
+        list-style: none;
+        padding: 0 20px;
+        margin: 0;
+    }
+
+    .mobile-menu-list li {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .mobile-menu-list a {
+        display: block;
+        color: var(--text-white);
+        text-decoration: none;
+        padding: 20px 0;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    /* 最下部の黒い追従バー */
+    .mobile-bottom-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        background-color: #222222;
+        z-index: 1000;
+    }
+
+    .mobile-bottom-bar a {
+        flex: 1;
+        color: var(--text-white);
+        text-align: center;
+        padding: 15px 0;
+        text-decoration: none;
+        font-size: 13px;
+        border-right: 1px solid var(--text-white); /* 白い細線 */
+    }
+
+    .mobile-bottom-bar a:last-child {
+        border-right: none;
+    }
 }
