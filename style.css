@@ -24,6 +24,44 @@ body {
     background-size: cover;
     background-position: center;
 }
+/* メインビジュアル上の文字の配置とデザイン */
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* ★薄い黒フィルター */
+    padding: 20px;
+    text-align: center;
+}
+
+.hero-static-news {
+    color: var(--text-white);
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+}
+
+.hero-animated-text {
+    color: var(--text-white);
+    font-weight: bold;
+    font-size: 20px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+    opacity: 0; /* ★最初は透明（0）にして見えなくする */
+    
+    /* ★アニメーションの呼び出し（1.5秒かけて、0.5秒遅れでスタート） */
+    animation: fadeInText 1.5s ease-out 0.5s forwards; 
+}
+
+/* ★アニメーションの設計図 */
+@keyframes fadeInText {
+    0% { opacity: 0; transform: translateY(15px); }   /* スタート時：透明 ＆ 少し下に配置 */
+    100% { opacity: 1; transform: translateY(0); }    /* ゴール時：くっきり ＆ 元の位置に戻る */
+}
+
 
 /* =========================================
    画面右側：中段の追従ボタン（PCのみ）
@@ -139,28 +177,28 @@ body {
         display: none !important;
     }
 
-    /* スマホ上部ヘッダー */
+       /* スマホ上部ヘッダー */
     .mobile-header {
         position: sticky;
         top: 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: var(--text-white);
+        background-color: var(--main-green); /* ★緑に変更！ */
         padding: 10px 20px;
         z-index: 1000;
-        border-bottom: 2px solid var(--main-green);
+        /* border-bottomは不要になったので削除 */
     }
 
     .mobile-logo {
-        color: var(--text-black);
+        color: var(--text-white); /* ★白に変更！ */
         font-weight: bold;
         text-decoration: none;
         font-size: 16px;
     }
 
     .hamburger-menu {
-        background-color: var(--main-green);
+        background-color: transparent; /* ★背景と同化させるため透明（transparent）に！ */
         width: 40px;
         height: 40px;
         display: flex;
