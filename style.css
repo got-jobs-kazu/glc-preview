@@ -39,20 +39,18 @@ body {
 .hero-static-news {
     color: var(--text-white);
     font-weight: bold;
-    font-size: 16px;
-    margin-bottom: 30px;
-    line-height: 1.6;
+    font-size: 14px; /* ★補足情報なので少しサイズを下げて強弱をつける */
+    margin-top: 20px; /* ★上の文字との間隔を空ける */
+    line-height: 1.8;
     text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
 }
 
 .hero-animated-text {
     color: var(--text-white);
     font-weight: bold;
-    font-size: 20px;
+    font-size: 28px; /* ★キャッチコピーとして大きく強調 */
     text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
-    opacity: 0; /* ★最初は透明（0）にして見えなくする */
-    
-    /* ★アニメーションの呼び出し（1.5秒かけて、0.5秒遅れでスタート） */
+    opacity: 0;
     animation: fadeInText 1.5s ease-out 0.5s forwards; 
 }
 
