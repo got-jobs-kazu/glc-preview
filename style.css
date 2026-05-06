@@ -16,14 +16,18 @@ body {
 }
 
 /* =========================================
-   メインビジュアル（画像差し替え）
+   メインビジュアル
 ========================================= */
 .main-visual {
     height: 600px;
-    background-image: url('glc_top.jpg'); /* ここで画像を読み込み！ */
+    /* 背景色を消し、画像ファイルを確実に指定する（ ./ は「同じフォルダにある」という意味です） */
+    background-image: url('./glc_top.jpg'); 
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent; /* 念のため背景色を透明にリセット */
 }
+
 /* メインビジュアル上の文字の配置とデザイン */
 .hero-content {
     display: flex;
